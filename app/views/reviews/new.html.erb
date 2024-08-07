@@ -1,0 +1,30 @@
+<h1>Ajouter un Avis pour <%= @restaurant.name %></h1>
+
+<%= form_with model: [@restaurant, @review], local: true do |form| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "erreur") %> empêchent cet avis d'être sauvegardé :</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Ajouter Avis' %>
+  </div>
+<% end %>
+
+<%= link_to 'Retour', restaurant_path(@restaurant) %>
